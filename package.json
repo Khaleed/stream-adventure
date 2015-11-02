@@ -1,0 +1,24 @@
+{
+  "name": "streams",
+  "version": "1.0.0",
+  "description": "Experimenting with streams using Node",
+  "main": "beebboop.js",
+  "dependencies": {
+    "split": "^1.0.0",
+    "through2": "^2.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Khaleed/stream-adventure.git"
+  },
+  "author": "Khalid Omar Ali",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Khaleed/stream-adventure/issues"
+  },
+  "homepage": "https://github.com/Khaleed/stream-adventure#readme"
+}
