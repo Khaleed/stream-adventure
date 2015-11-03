@@ -66,14 +66,9 @@ var http = require('http');
 var through2 = require('through2');
 
 // helpers
-
 function write(buffer, _, next) {
 	this.push(buffer.toString().toUpperCase());
 	next();
-}
-
-function end () {
-    this.push(null);
 }
 
 var server = http.createServer(function (req, res) {
@@ -84,7 +79,6 @@ var server = http.createServer(function (req, res) {
     }
 });
 server.listen(process.argv[2]);
-
 
 
 
