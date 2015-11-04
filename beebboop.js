@@ -4,5 +4,6 @@ Task: Just to make sure everything is working, just write a `program.js` that ou
 the string "beep boop" with a `console.log()`.
 
 */
+'use strict';
 
 console.log('beep boop');

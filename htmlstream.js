@@ -23,11 +23,26 @@ file lives.
 
 */
 
+'use strict';
+
 var fs = require('fs');
 var trumpet = require('trumpet');
 var through2 = require('through2');
 
-fs.createReadStream('input.html').pipe(trumpet);
+var tr = trumpet();
+
+var write = function (buffer, _, next) {
+	this.push(buffer.toString().toUpperCase());
+	next();
+};
+
+var stream = tr.select('.loud').createStream();
+
+stream.pipe(through2(write)).pipe(stream);
+
+process.stdin.pipe(tr).pipe(process.stdout);
+
+
 
 
 
