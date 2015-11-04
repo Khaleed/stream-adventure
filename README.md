@@ -1,1 +1,1 @@
-Experimenting with streams using Node 
+Experimenting with Node streams by playing substack's command-line interface game! 

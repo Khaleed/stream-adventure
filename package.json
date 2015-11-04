@@ -5,8 +5,12 @@
   "main": "beebboop.js",
   "dependencies": {
     "concat-stream": "^1.5.1",
+    "install": "^0.2.4",
+    "request": "^2.40.0",
     "split": "^1.0.0",
-    "through2": "^2.0.0"
+    "through2": "^2.0.0",
+    "trumpet": "^1.7.2",
+    "websocket-stream": "^2.0.2"
   },
   "devDependencies": {},
   "scripts": {
