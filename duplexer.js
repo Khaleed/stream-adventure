@@ -21,15 +21,52 @@ your solution file is located.
 
 */
 
-var duplexer2 = require('duplexer2');
-var stream = require('stream');
+// var duplex = require('duplexer');
+
+// var spawn = require('child_process').spawn;
+
+// module.exports = function (cmd, args) {
+// 	// spawn the child process
+// 	var child = spawn(cmd, args); 
+// 	// join stdin and stdout to make a duplex stream
+// 	return duplex(child.stdin, child.stdout);
+// };
+
+// without duplexer2
+
+// var spawn = require('child_process').spawn;
+// var Stream = require('stream');
+
+// module.exports = function (cmd, args) {
+
+// 	var child = spawn(cmd, args), 
+// 	    stream = new Stream();
+
+// 	// writable stream
+// 	stream.write = function (chunk, enc, cb) {
+// 		child.stdin.write(chunk, enc, cb);
+// 	};
+	
+// 	stream.end = function (chunk, enc, cb) {
+// 		child.stdin.write(chunk, enc, cb);
+// 	};
+
+// 	// readable steam
+// 	child.stdout.on('data', function (chunk) {
+// 		stream.emit('data', chunk);
+// 	});
+	
+// 	child.stdout.on('end', function(chunk) {
+// 		stream.emit('end');
+// 	});
+	
+// 	return stream;
+// };
 
 var spawn = require('child_process').spawn;
+var duplexer = require('duplexer2');
 
 module.exports = function (cmd, args) {
-	// spawn the child process
-	var child = spawn(cmd, args); 
-	// join stdin and stdout to made a duplex stream
-	var duplex = duplexer2(child.stdin, child.stdout);
-	return duplex;
+  var p = spawn(cmd, args);
+  return duplexer(p.stdin, p.stdout);
 };
