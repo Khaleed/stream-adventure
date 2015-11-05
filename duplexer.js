@@ -21,52 +21,48 @@ your solution file is located.
 
 */
 
-// var duplex = require('duplexer');
+// with duplexer2
 
-// var spawn = require('child_process').spawn;
+var duplex = require('duplexer2');
 
-// module.exports = function (cmd, args) {
-// 	// spawn the child process
-// 	var child = spawn(cmd, args); 
-// 	// join stdin and stdout to make a duplex stream
-// 	return duplex(child.stdin, child.stdout);
-// };
+var spawn = require('child_process').spawn;
+
+module.exports = function (cmd, args) {
+	// spawn the child process
+	var child = spawn(cmd, args); 
+	// join stdin and stdout to make a duplex stream
+	return duplex(child.stdin, child.stdout);
+};
 
 // without duplexer2
 
-// var spawn = require('child_process').spawn;
-// var Stream = require('stream');
-
-// module.exports = function (cmd, args) {
-
-// 	var child = spawn(cmd, args), 
-// 	    stream = new Stream();
-
-// 	// writable stream
-// 	stream.write = function (chunk, enc, cb) {
-// 		child.stdin.write(chunk, enc, cb);
-// 	};
-	
-// 	stream.end = function (chunk, enc, cb) {
-// 		child.stdin.write(chunk, enc, cb);
-// 	};
-
-// 	// readable steam
-// 	child.stdout.on('data', function (chunk) {
-// 		stream.emit('data', chunk);
-// 	});
-	
-// 	child.stdout.on('end', function(chunk) {
-// 		stream.emit('end');
-// 	});
-	
-// 	return stream;
-// };
-
 var spawn = require('child_process').spawn;
-var duplexer = require('duplexer2');
+var Stream = require('stream');
 
 module.exports = function (cmd, args) {
-  var p = spawn(cmd, args);
-  return duplexer(p.stdin, p.stdout);
+
+	var child = spawn(cmd, args), 
+	    stream = new Stream();
+
+	// writable stream
+	stream.write = function (chunk, enc, cb) {
+		child.stdin.write(chunk, enc, cb);
+	};
+	
+	stream.end = function (chunk, enc, cb) {
+		child.stdin.write(chunk, enc, cb);
+	};
+
+	// readable steam
+	child.stdout.on('data', function (chunk) {
+		stream.emit('data', chunk);
+	});
+	
+	child.stdout.on('end', function(chunk) {
+		stream.emit('end');
+	});
+	
+	return stream;
 };
+
+
