@@ -21,9 +21,15 @@ your solution file is located.
 
 */
 
-var duplexer2 = require('.');
+var duplexer2 = require('duplexer2');
+var stream = require('stream');
 
+var spawn = require('child_process').spawn;
 
-
-
-
+module.exports = function (cmd, args) {
+	// spawn the child process
+	var child = spawn(cmd, args); 
+	// join stdin and stdout to made a duplex stream
+	var duplex = duplexer2(child.stdin, child.stdout);
+	return duplex;
+};
