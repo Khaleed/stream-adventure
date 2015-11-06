@@ -54,9 +54,11 @@ your solution file is located.
 var duplexer = require('duplexer');
 var through = require('through');
 
+
 module.exports = function(counter) {
 	var tallies = {};
 	var writableStream;
+
 	function recordCount(obj) {
 		var country = obj.country;
 		var count = tallies[country] || 0;
@@ -69,3 +71,6 @@ module.exports = function(counter) {
 	writableStream = through(recordCount, setCounts);
 	return duplexer(writableStream, counter);
 };
+
+
+

@@ -43,7 +43,6 @@ input and pipe the output through to `process.stdout`.
 Make sure to `npm install split through2` in the directory where your solution
 file lives.
 
-
 */
 
 var split = require('split');
@@ -59,4 +58,10 @@ process.stdin.pipe(split()).pipe(through2(function (line, _, next) {
 	}
 	next();
 })).pipe(process.stdout);
+
+
+
+
+
+
 

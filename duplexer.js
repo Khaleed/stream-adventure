@@ -36,33 +36,33 @@ module.exports = function (cmd, args) {
 
 // without duplexer2
 
-// var spawn = require('child_process').spawn;
-// var Stream = require('stream');
+var spawn = require('child_process').spawn;
+var Stream = require('stream');
 
-// module.exports = function (cmd, args) {
+module.exports = function (cmd, args) {
 
-// 	var child = spawn(cmd, args), 
-// 	    stream = new Stream();
+	var child = spawn(cmd, args), 
+	    stream = new Stream();
 
-// 	// writable stream
-// 	stream.write = function (chunk, enc, cb) {
-// 		child.stdin.write(chunk, enc, cb);
-// 	};
+	// writable stream
+	stream.write = function (chunk, enc, cb) {
+		child.stdin.write(chunk, enc, cb);
+	};
 	
-// 	stream.end = function (chunk, enc, cb) {
-// 		child.stdin.write(chunk, enc, cb);
-// 	};
+	stream.end = function (chunk, enc, cb) {
+		child.stdin.write(chunk, enc, cb);
+	};
 
-// 	// readable steam
-// 	child.stdout.on('data', function (chunk) {
-// 		stream.emit('data', chunk);
-// 	});
+	// readable steam
+	child.stdout.on('data', function (chunk) {
+		stream.emit('data', chunk);
+	});
 	
-// 	child.stdout.on('end', function(chunk) {
-// 		stream.emit('end');
-// 	});
+	child.stdout.on('end', function(chunk) {
+		stream.emit('end');
+	});
 	
-// 	return stream;
-// };
+	return stream;
+};
 
 
