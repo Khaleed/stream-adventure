@@ -43,10 +43,15 @@ module.exports = function() {
 	
 	return combiner(
 		// read newline-separated json,
+		
 		// group books into genres,
+		
 		// then gzip the output
-		process.openStdin(), // open stdin 
-		process.stdout; 
+		
 	);
 
 };
+
+// Twitch - Virtual Machine - The Layer -> Anything that lives on a virtual machine 
+
+//  
