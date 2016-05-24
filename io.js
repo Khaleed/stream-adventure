@@ -8,6 +8,4 @@ Don't overthink this.
 
 */
 
-var fs = require('fs');
-
 process.stdin.pipe(process.stdout);
