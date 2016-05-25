@@ -5,6 +5,7 @@
   "main": "beebboop.js",
   "dependencies": {
     "concat-stream": "^1.5.1",
+    "crypto": "0.0.3",
     "duplexer": "^0.1.1",
     "duplexer2": "^0.1.2",
     "install": "^0.2.4",
@@ -12,6 +13,7 @@
     "split": "^1.0.0",
     "stream": "0.0.2",
     "stream-combiner": "^0.2.2",
+    "tar": "^2.2.1",
     "through": "^2.3.8",
     "through2": "^2.0.0",
     "trumpet": "^1.7.2",
