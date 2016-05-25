@@ -37,21 +37,38 @@ npm install stream-combiner split
 */
 
 var combiner = require('stream-combiner');
-var split = require('split');
+var through = require('through');
+var zlib = require('zlib');
 
-module.exports = function() {
-	
-	return combiner(
-		// read newline-separated json,
-		
-		// group books into genres,
-		
-		// then gzip the output
-		
-	);
+module.exports = function () {
+    var bufferToJson = through(function(buffer) {
+        this.queue(JSON.parse(buffer.toString()));
+    });
 
+    var genre;
+    var genreGrouper = through(function(line) {
+        if (line.type === "genre") {
+            if (genre !== undefined) {
+                this.queue(genre);
+            }
+
+            genre = { name: line.name, books: [] };
+        } else if (line.type === "book") {
+            genre.books.push(line.name);
+        }
+    }, function() {
+        this.queue(genre);
+        this.queue(null);
+    });
+
+    var toStringer = through(function(genreObj) {
+        this.queue(JSON.stringify(genreObj) + "\n");
+    });
+
+    return combiner(
+        bufferToJson,
+        genreGrouper,
+        toStringer,
+        zlib.createGzip()
+    );
 };
-
-// Twitch - Virtual Machine - The Layer -> Anything that lives on a virtual machine 
-
-//  

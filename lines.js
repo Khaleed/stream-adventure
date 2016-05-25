@@ -1,4 +1,4 @@
-/*  
+/*
 
 Instead of transforming every line as in the previous "TRANSFORM" example,
 for this challenge, convert even-numbered lines to upper-case and odd-numbered
